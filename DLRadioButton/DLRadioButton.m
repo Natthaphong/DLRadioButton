@@ -239,6 +239,25 @@ static BOOL _groupModifing = NO;
     }
 }
 
+
+- (void)setMultipleSelected:(BOOL)selected {
+    if ((self.isMultipleSelectionEnabled ||
+         (selected != self.isSelected &&
+          [self.icon.accessibilityIdentifier isEqualToString:kGeneratedIconName] &&
+          [self.iconSelected.accessibilityIdentifier isEqualToString:kGeneratedIconName])) &&
+        self.animationDuration > 0.0) {
+        CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"contents"];
+        animation.duration = self.animationDuration;
+        animation.fromValue = self.isSelected ? (id)self.iconSelected.CGImage : (id)self.icon.CGImage;
+        animation.toValue = self.isSelected ? (id)self.icon.CGImage : (id)self.iconSelected.CGImage;
+        [self.imageView.layer addAnimation:animation forKey:@"icon"];
+    }
+    
+    
+    [super setSelected:selected];
+    
+}
+
 #pragma mark - UIView
 
 - (id)initWithCoder:(NSCoder *)aDecoder {

@@ -21,6 +21,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (NSArray<DLRadioButton *> *)selectedButtons;
 
+- (void)setSelected:(BOOL)selected;
+- (void)setMultipleSelected:(BOOL)selected ;
+
 /**
  * @brief Container for holding other buttons in same group.
  */
