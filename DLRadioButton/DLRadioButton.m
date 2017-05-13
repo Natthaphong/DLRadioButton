@@ -135,7 +135,13 @@ static BOOL _groupModifing = NO;
 }
 
 - (void)touchUpInside {
-    [self setSelected:YES];
+  
+    if (!self.isMultipleSelectionEnabled && self.isSelected == YES) {
+         [self setSelected:NO];
+    }else{
+        [self setSelected:YES];
+    }
+   
 }
 
 - (void)initRadioButton {
